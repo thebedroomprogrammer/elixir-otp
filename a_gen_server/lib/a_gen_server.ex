@@ -1,4 +1,4 @@
-defmodule Server do
+defmodule KeyVal.Server do
   use GenServer
 
   def start do

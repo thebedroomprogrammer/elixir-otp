@@ -1,9 +1,9 @@
-defmodule KeyValWithMultipleStores.MixProject do
+defmodule AGenServer.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :key_val_with_multiple_stores,
+      app: :ex1_a_gen_server,
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,

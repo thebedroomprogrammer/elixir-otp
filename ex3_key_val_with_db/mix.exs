@@ -1,9 +1,9 @@
-defmodule AGenServer.MixProject do
+defmodule Ex3KeyValWithDb.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :a_gen_server,
+      app: :ex3_key_val_with_db,
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,

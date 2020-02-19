@@ -16,6 +16,7 @@ defmodule KeyVal.DB do
     type: :supervisor
 }
   end
+
   defp worker_spec(worker_id) do
     initial_worker_spec = {KeyVal.DB_Worker, {@db_path, worker_id}}
     Supervisor.child_spec(initial_worker_spec, id: worker_id)

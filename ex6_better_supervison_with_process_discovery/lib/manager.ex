@@ -1,27 +1,32 @@
 defmodule KeyVal.Manager do
-  use GenServer
-
-  def start_link(_) do
+  def start_link() do
     IO.puts("Starting Manager")
-    GenServer.start_link(__MODULE__, nil, name: __MODULE__)
+    DynamicSupervisor.start_link(
+      name: __MODULE__,
+      strategy: :one_for_one
+    )
   end
 
-  def init(_) do
-    {:ok, %{}}
+  defp start_child(store_name) do
+    DynamicSupervisor.start_child(
+      __MODULE__,
+      {KeyVal.Server, store_name}
+    )
   end
+
+  def child_spec(_) do
+    %{
+      id: __MODULE__,
+      start: {__MODULE__, :start_link, []},
+      type: :supervisor
+    }
+  end
+
 
   def create_store(store_name) do
-    GenServer.call(__MODULE__, {:create_store, store_name})
-  end
-
-  def handle_call({:create_store, store_name}, _, state) do
-    case Map.fetch(state, store_name) do
-      {:ok, server} ->
-        {:reply, server, state}
-
-      :error ->
-        {:ok, pid} = KeyVal.Server.start(store_name)
-        {:reply, pid, Map.put(state, store_name, pid)}
+    case start_child(store_name) do
+      {:ok, pid} -> pid
+      {:error, {:already_started, pid}} -> pid
     end
   end
 end

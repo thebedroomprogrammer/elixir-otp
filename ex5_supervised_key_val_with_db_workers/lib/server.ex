@@ -2,6 +2,7 @@ defmodule KeyVal.Server do
   use GenServer
 
   def start(store_name) do
+    IO.puts "Starting Server"
     GenServer.start(__MODULE__, store_name)
   end
 

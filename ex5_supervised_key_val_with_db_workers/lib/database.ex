@@ -2,9 +2,9 @@ defmodule KeyVal.DB do
   use GenServer
   @db_path "./database"
 
-  def start do
+  def start_link(_) do
     IO.puts "Starting Database"
-    GenServer.start(__MODULE__, nil, name: __MODULE__)
+    GenServer.start_link(__MODULE__, nil, name: __MODULE__)
   end
 
   def init(_) do

@@ -1,13 +1,12 @@
 defmodule KeyVal.Manager do
   use GenServer
 
-  def start do
+  def start_link(_) do
     IO.puts "Starting Manager"
-    GenServer.start(__MODULE__, nil,name: __MODULE__)
+    GenServer.start_link(__MODULE__, nil,name: __MODULE__)
   end
 
   def init(_) do
-    KeyVal.DB.start()
     {:ok, %{}}
   end
 

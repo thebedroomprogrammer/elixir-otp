@@ -6,6 +6,6 @@ defmodule KeyVal.System do
   end
 
   def init(_) do
-    Supervisor.init([KeyVal.Registry ,KeyVal.DB, KeyVal.Manager], strategy: :one_for_one)
+    Supervisor.init([KeyVal.Registry ,KeyVal.DB, KeyVal.Manager,KeyVal.Web], strategy: :one_for_one)
   end
 end

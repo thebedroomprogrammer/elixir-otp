@@ -7,6 +7,7 @@ defmodule KeyVal.Manager do
   end
 
   def init(_) do
+    KeyVal.DB.start_link()
     {:ok, %{}}
   end
 

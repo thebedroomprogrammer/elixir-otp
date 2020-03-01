@@ -26,3 +26,4 @@ defmodule KeyVal.Manager do
     end
   end
 end
+
